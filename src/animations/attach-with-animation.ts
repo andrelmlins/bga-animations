@@ -26,7 +26,7 @@ function attachWithAnimation(animationManager: AnimationManager, animation: IBga
     const settings = animation.settings as BgaAttachWithAnimationSettings;
     const element = settings.animation.settings.element;
 
-    const fromRect = animationManager.game.getBoundingClientRectIgnoreZoom(element);
+    const fromRect = (animationManager.game as any).getBoundingClientRectIgnoreZoom(element);
     settings.animation.settings.fromRect = fromRect;
     settings.attachElement.insertAdjacentElement(settings.where, element);
     settings.afterAttach?.(element, settings.attachElement);

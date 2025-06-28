@@ -20,12 +20,12 @@ function getDeltaCoordinates(element: HTMLElement, settings: BgaAnimationWithOri
         x = settings.fromDelta.x;
         y = settings.fromDelta.y;
     } else {
-        const originBR = settings.fromRect ?? animationManager.game.getBoundingClientRectIgnoreZoom(settings.fromElement);
+        const originBR = settings.fromRect ?? (animationManager.game as any).getBoundingClientRectIgnoreZoom(settings.fromElement);
 
         // TODO make it an option ?
         const originalTransform = element.style.transform;
         element.style.transform = '';
-        const destinationBR = animationManager.game.getBoundingClientRectIgnoreZoom(element);
+        const destinationBR = (animationManager.game as any).getBoundingClientRectIgnoreZoom(element);
         element.style.transform = originalTransform;
 
         x = (destinationBR.left + destinationBR.right)/2 - (originBR.left + originBR.right)/2;
@@ -44,7 +44,7 @@ function logAnimation(animationManager: AnimationManager, animation: IBgaAnimati
     const settings = animation.settings;
     const element = settings.element;
     if (element) {
-        console.log(animation, settings, element, element.getBoundingClientRect(), animationManager.game.getBoundingClientRectIgnoreZoom(element), element.style.transform);
+        console.log(animation, settings, element, element.getBoundingClientRect(), (animationManager.game as any).getBoundingClientRectIgnoreZoom(element), element.style.transform);
     } else {
         console.log(animation, settings);
     }
