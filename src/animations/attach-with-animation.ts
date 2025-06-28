@@ -6,6 +6,9 @@ interface BgaAttachWithAnimationSettings extends BgaElementAnimationSettings {
      */
     attachElement: HTMLElement;
 
+
+    where: InsertPosition;
+
     /**
      * A function called after attaching the element.
      */
@@ -25,7 +28,7 @@ function attachWithAnimation(animationManager: AnimationManager, animation: IBga
 
     const fromRect = animationManager.game.getBoundingClientRectIgnoreZoom(element);
     settings.animation.settings.fromRect = fromRect;
-    settings.attachElement.appendChild(element);
+    settings.attachElement.insertAdjacentElement(settings.where, element);
     settings.afterAttach?.(element, settings.attachElement);
     return animationManager.play(settings.animation);
 }
