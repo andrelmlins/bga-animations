@@ -20,7 +20,12 @@ function slideAnimation(animationManager: AnimationManager, animation: IBgaAnima
         element.style.zIndex = `${settings?.zIndex ?? 10}`;
         element.style.transition = null;
         element.offsetHeight;
-        element.style.transform = `translate(${-x}px, ${-y}px) rotate(${settings?.rotationDelta ?? 0}deg)`;
+
+        if (settings?.rotationDelta === 90){
+            element.style.transform = `translate(${y}px, ${-x}px) rotate(${settings?.rotationDelta ?? 0}deg)`;
+        } else {
+            element.style.transform = `translate(${-x}px, ${-y}px) rotate(${settings?.rotationDelta ?? 0}deg)`;
+        }
 
         let timeoutId = null;
 
